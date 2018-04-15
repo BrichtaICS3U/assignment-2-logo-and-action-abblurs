@@ -11,6 +11,11 @@ import pygame
 from rain import Rain
 pygame.init()
 
+pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
+pygame.mixer.music.load('GoodMusic.mp3')
+pygame.mixer.music.play(0) #-1 means loops for ever, 0 means play just once)
+#https://www.youtube.com/watch?v=X2WH8mHJnhM
+
 # Define some colours
 # Colours are defined using RGB values
 BLACK = (0, 0, 0)
@@ -42,6 +47,7 @@ carryOn = True
 # The clock will be used to control how fast the screen updates
 clock = pygame.time.Clock()
 background_image = pygame.image.load("background.png")
+#http://davidgmiller.typepad.com/lovelandmagazine/2014/01/montessori-school-holds-winter-performance.html
 
 #---------Main Program Loop----------
 while carryOn:
@@ -63,6 +69,8 @@ while carryOn:
 
     # --- Limit to 60 frames per second
     clock.tick(60)
+
+    
 
 # Once the main program loop is exited, stop the game engine
 pygame.quit()
