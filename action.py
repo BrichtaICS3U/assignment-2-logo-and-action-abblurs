@@ -10,6 +10,8 @@ import pygame
 import random #to randomize rain fall
 #Import Rain class
 from rain import Rain
+#from rain import Cloud
+
 pygame.init()
 
 pygame.mixer.pre_init(frequency=44100, size=-16, channels=2, buffer=4096)
@@ -35,8 +37,9 @@ size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Recorder Animation")
 
-#List that will contain all rain sprites 
+#Lists that will contain all rain / cloud sprites 
 raindrops = pygame.sprite.Group()
+#clouds = pygame.sprite.Group()
 
 # This loop will continue until the user exits the game
 carryOn = True
@@ -46,6 +49,16 @@ clock = pygame.time.Clock()
 
 background_image = pygame.image.load("background.png")
 #http://davidgmiller.typepad.com/lovelandmagazine/2014/01/montessori-school-holds-winter-performance.html
+
+#Making the rain drops
+for i in range(100):   
+    drop = Rain(BLUE, 3, 7)
+    raindrops.add(drop)
+
+#Making the clouds
+#for i in range(6):
+    #cloud = Cloud(WHITE, 6, 4)
+    #clouds.add(cloud)
 
 #---------Main Program Loop----------
 while carryOn:
@@ -58,15 +71,18 @@ while carryOn:
 
     screen.blit(background_image, [0, 0])
 
-    # --- Game logic goes here (Rainfall)
-    for i in range(100):   
-        drop = Rain(BLUE, 3, 7)
-        raindrops.add(drop)
-        raindrops.draw(screen)
-        raindrops.update()
+    #Rainfall
+    for rain in raindrops:
+        rain.fall()
 
+    #Clouds moving
+    #for cloud in clouds:
+        #cloud.fall()
     
-    # --- Draw code goes here
+    raindrops.draw(screen)
+    raindrops.update()
+    #clouds.draw(screen)
+    #clouds.update()
     
     # Update the screen with queued shapes
     pygame.display.flip()
