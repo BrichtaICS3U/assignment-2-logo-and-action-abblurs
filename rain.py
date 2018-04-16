@@ -29,7 +29,7 @@ class Rain(pygame.sprite.Sprite):
 
         # Get random x/y coordinates
         self.rect.x = random.randrange(10, 630)
-        self.rect.y = random.randrange(-600, -100)
+        self.rect.y = random.randrange(-800, -100)
         
     def fall(self):
         self.rect.x += 1
@@ -54,17 +54,20 @@ class Cloud(pygame.sprite.Sprite):
         self.image.set_colorkey(WHITE)
 
         # Draw the cloud 
-        pygame.draw.rect(self.image, color, [0, 0, width, height])
+        pygame.draw.ellipse(self.image, color, [0, 0, width, height])
          
         # Fetch the rectangle object that has the dimensions of the image.
         self.rect = self.image.get_rect()
 
         # Get x/y coordinates
-        self.rect.x = random.randrange(5, 630)
-        self.rect.y = random.randrange(5, 50)
+        self.rect.x = random.randrange(-100, 630)
+        self.rect.y = random.randrange(0, 50)
 
-    def fall(self):
-        self.rect.x += 10
+    def move(self):
+        self.rect.x += 1
+
+        if self.rect.x > 640:
+            self.rect.x = -50
         
 
         

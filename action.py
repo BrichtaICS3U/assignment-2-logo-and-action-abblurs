@@ -10,7 +10,7 @@ import pygame
 import random #to randomize rain fall
 #Import Rain class
 from rain import Rain
-#from rain import Cloud
+from rain import Cloud
 
 pygame.init()
 
@@ -26,6 +26,7 @@ WHITE = (255, 255, 255)
 GREEN = (0, 255, 0)
 RED = (255, 0, 0)
 BLUE = (79, 184, 219)
+GREY = (196, 196, 196)
 
 # Set the screen size
 SCREENWIDTH = 640
@@ -39,7 +40,7 @@ pygame.display.set_caption("Recorder Animation")
 
 #Lists that will contain all rain / cloud sprites 
 raindrops = pygame.sprite.Group()
-#clouds = pygame.sprite.Group()
+clouds = pygame.sprite.Group()
 
 # This loop will continue until the user exits the game
 carryOn = True
@@ -56,9 +57,9 @@ for i in range(100):
         raindrops.add(drop)
 
 #Making the clouds
-#for i in range(6):
-    #cloud = Cloud(WHITE, 6, 4)
-    #clouds.add(cloud)
+for i in range(7):
+    cloud = Cloud(GREY, 50, 35)
+    clouds.add(cloud)
 
 #---------Main Program Loop----------
 while carryOn:
@@ -76,13 +77,13 @@ while carryOn:
         rain.fall()
 
     #Clouds moving
-    #for cloud in clouds:
-        #cloud.fall()
+    for cloud in clouds:
+        cloud.move()
     
     raindrops.draw(screen)
     raindrops.update()
-    #clouds.draw(screen)
-    #clouds.update()
+    clouds.draw(screen)
+    clouds.update()
     
     # Update the screen with queued shapes
     pygame.display.flip()
