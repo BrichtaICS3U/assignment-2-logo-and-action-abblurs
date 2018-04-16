@@ -29,10 +29,10 @@ class Rain(pygame.sprite.Sprite):
 
         # Get random x/y coordinates
         self.rect.x = random.randrange(10, 630)
-        self.rect.y = random.randrange(-200, -100)
+        self.rect.y = random.randrange(-600, -100)
         
     def fall(self):
-        self.rect.x += 4
+        self.rect.x += 1
         self.rect.y += 3
 
         if self.rect.y > 427:

@@ -52,8 +52,8 @@ background_image = pygame.image.load("background.png")
 
 #Making the rain drops
 for i in range(100):   
-    drop = Rain(BLUE, 3, 7)
-    raindrops.add(drop)
+        drop = Rain(BLUE, 3, 7)
+        raindrops.add(drop)
 
 #Making the clouds
 #for i in range(6):
@@ -70,7 +70,7 @@ while carryOn:
             carryOn = False
 
     screen.blit(background_image, [0, 0])
-
+    
     #Rainfall
     for rain in raindrops:
         rain.fall()
