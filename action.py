@@ -7,6 +7,7 @@
 # Import the pygame library and initialise the game engine
 # Don't forget to import your class
 import pygame
+import random #to randomize rain fall
 #Import Rain class
 from rain import Rain
 pygame.init()
@@ -34,36 +35,39 @@ size = (SCREENWIDTH, SCREENHEIGHT)
 screen = pygame.display.set_mode(size)
 pygame.display.set_caption("Recorder Animation")
 
-rain_list = pygame.sprite.Group() #List that will containing all sprites
- 
-rain1 = Rain(BLUE, 30, 50)
- 
-# Add the rain to the list of objects
-rain_list.add(rain1)
+#List that will contain all rain sprites 
+raindrops = pygame.sprite.Group()
 
 # This loop will continue until the user exits the game
 carryOn = True
 
 # The clock will be used to control how fast the screen updates
 clock = pygame.time.Clock()
+
 background_image = pygame.image.load("background.png")
 #http://davidgmiller.typepad.com/lovelandmagazine/2014/01/montessori-school-holds-winter-performance.html
 
 #---------Main Program Loop----------
 while carryOn:
         # --- Main event loop ---
-    for event in pygame.event.get(): # Player did something
+    for event in pygame.event.get(): 
         if event.type == pygame.QUIT: # Player clicked close button
+            carryOn = False
+        if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE: #Player clicked space bar
             carryOn = False
 
     screen.blit(background_image, [0, 0])
-    
 
-    # --- Game logic goes here
-    rain_list.update()
+    # --- Game logic goes here (Rainfall)
+    for i in range(100):   
+        drop = Rain(BLUE, 3, 7)
+        raindrops.add(drop)
+        raindrops.draw(screen)
+        raindrops.update()
+
     
     # --- Draw code goes here
-
+    
     # Update the screen with queued shapes
     pygame.display.flip()
 
